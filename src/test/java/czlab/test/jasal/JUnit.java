@@ -12,12 +12,15 @@ package czlab.test.jasal;
 
 import static org.junit.Assert.assertTrue;
 import junit.framework.JUnit4TestAdapter;
-import java.util.Map;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.util.Map;
+import czlab.jasal.NCMap;
+import czlab.jasal.NCOrderedMap;
 
 /**
  *
@@ -46,11 +49,40 @@ public class JUnit {
   public void close() throws Exception {
   }
 
-  @Test
-  public void testDummy() throws Exception {
-    assertTrue(true);
+  private void testm(Map<String,String> m) throws Exception {
+    m.put("AbC", "hello");
+    m.put("XYz", "hey");
+    m.put("a", "A");
+    assertTrue(m.size() == 3);
+    assertTrue(m.get("abc") != null);
+    assertTrue(m.get("xyz") != null);
+    assertTrue(m.get("AbC").equals(m.get("abc")));
+    assertTrue(m.get("XYz").equals(m.get("xyz")));
   }
 
+  @Test
+  public void testMapOrdered() throws Exception {
+    Map<String,String> m= new NCOrderedMap<>();
+    testm(m);
+    int i=0;
+    String[] k= {"AbC", "XYz", "a"};
+    for (Map.Entry<String,String> e : m.entrySet()) {
+      assertTrue(e.getKey().equals(k[i]));
+      ++i;
+    }
+    String[] vs= {"hello", "hey", "A"};
+    i=0;
+    for (String v :m.values()) {
+      assertTrue(v.equals(vs[i]));
+      ++i;
+    }
+  }
+
+  @Test
+  public void testMapNC() throws Exception {
+    NCMap<String> m= new NCMap<>();
+    testm(m);
+  }
 
 }
 
