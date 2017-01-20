@@ -1,12 +1,31 @@
+/node_modules
+/targets
+/target
+/build
+/out
+/lib
+/classes
+/checkouts
+/public
+
+pom.xml.asc
+pom.xml
+
 *.class
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
+*.asc
 *.jar
-*.war
-*.ear
+*.zip
+*.gz
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+/.lein-*
+/.nrepl*
+.hgignore
+.hg/
+
+._.DS_Store
+.DS_Store
+.svn
+.sass-cache
+
+
+
