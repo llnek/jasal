@@ -84,11 +84,6 @@ public class TCore extends ThreadPoolExecutor implements RejectedExecutionHandle
   }
 
   @Override
-  public Object restart(Object arg) {
-    return start(arg);
-  }
-
-  @Override
   public Object start(Object arg) {
     _paused=false;
     return this;
