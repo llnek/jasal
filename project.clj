@@ -5,7 +5,7 @@
   :license {:url "http://www.eclipse.org/legal/epl-v10.html"
             :name "Eclipse Public License"}
 
-  :description "General clojure helper functions"
+  :description "General helper java classes + interfaces."
   :url "https://github.com/llnek/jasal"
 
   :dependencies [[org.apache.logging.log4j/log4j-slf4j-impl "2.8"]
