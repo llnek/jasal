@@ -53,6 +53,7 @@ public class JUnit {
     m.put("AbC", "hello");
     m.put("XYz", "hey");
     m.put("a", "A");
+
     assertTrue(m.size() == 3);
     assertTrue(m.get("abc") != null);
     assertTrue(m.get("xyz") != null);
