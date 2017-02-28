@@ -10,6 +10,10 @@ projects, such as `project wabbit`.
 Add the following dependency to your `project.clj` file:
 
     [io.czlab/jasal "1.0.0"]
+    
+## Documentation
+
+* [API Docs](https://llnek.github.io/jasal/)
 
 ## Usage
 
