@@ -15,7 +15,7 @@
   :plugins [[lein-codox "0.10.3"]
             [lein-junit "1.1.8"]
             [lein-javadoc "0.3.0"]
-            [lein-pprint "1.1.2"]]
+            [lein-cprint "1.2.0"]]
 
   :profiles {:provided {:dependencies
                         [[org.clojure/clojure "1.8.0" :scope "provided"]
