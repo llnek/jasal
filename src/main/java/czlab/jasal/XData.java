@@ -20,7 +20,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
+import java.util.Arrays;
 import org.slf4j.Logger;
 
 /**
@@ -176,6 +179,11 @@ public class XData implements Serializable, Disposable {
       bits = (byte[]) _data;
     }
     else
+    if (_data instanceof char[]) {
+      _data = toBytes( (char[]) _data );
+      bits= (byte[]) _data;
+    }
+    else
     if (_data != null) {
       throw new IOException("can't getBytes on content");
     }
@@ -208,6 +216,11 @@ public class XData implements Serializable, Disposable {
       } catch (Exception e) {
         TLOG.error("", e);
       }
+    }
+    else
+    if (_data instanceof char[]) {
+      _data = toBytes( (char[]) _data );
+      len = ((byte[]) _data).length;
     }
     else
     if (_data != null) {
@@ -251,6 +264,13 @@ public class XData implements Serializable, Disposable {
     _encoding= "utf-8";
     _cls=true;
     _data=null;
+  }
+
+  /**
+   */
+  private byte[] toBytes(char[] cs) {
+    ByteBuffer bb = Charset.forName(_encoding).encode(CharBuffer.wrap(cs));
+    return Arrays.copyOfRange(bb.array(), bb.position(), bb.limit());
   }
 
 }
