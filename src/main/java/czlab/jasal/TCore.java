@@ -39,8 +39,8 @@ public class TCore extends ThreadPoolExecutor implements RejectedExecutionHandle
   public TCore(final String id,
                int tds,
                long keepAliveMillis, boolean trace) {
-    super(Math.max(1,tds),
-          Math.max(1,tds),
+    super(Math.max(2,tds),
+          Math.max(2,tds),
           keepAliveMillis,
           TimeUnit.MILLISECONDS,
           new LinkedBlockingQueue<Runnable>());
@@ -87,6 +87,11 @@ public class TCore extends ThreadPoolExecutor implements RejectedExecutionHandle
   public Object start(Object arg) {
     _paused=false;
     return this;
+  }
+
+  @Override
+  public Object start() {
+    return start(null);
   }
 
   @Override

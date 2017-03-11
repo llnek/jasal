@@ -13,11 +13,15 @@ package czlab.jasal;
 /**
  * @author Kenneth Leung
  */
-public interface Restartable extends Startable {
+public interface Restartable {
 
   /**
    */
   public Object restart(Object arg);
+
+  /**
+   */
+  public Object restart();
 
 }
 
