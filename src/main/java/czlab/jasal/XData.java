@@ -237,7 +237,7 @@ public class XData implements Serializable, Disposable {
 
   /**
    */
-  public String strify() throws IOException {
+  public String strit() throws IOException {
     return !hasContent()
       ? null
       : (_data instanceof String)
