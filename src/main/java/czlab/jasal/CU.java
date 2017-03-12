@@ -95,7 +95,7 @@ public enum CU {
   }
 
   /**
-   * null string to blank.  safely stringify this object.
+   * null string to blank.  safely strify this object.
    */
   public static String nsb(Object x) {
     return x==null ? "" : x.toString();
