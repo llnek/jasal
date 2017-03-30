@@ -13,7 +13,7 @@ package czlab.jasal;
 /**
  * @author Kenneth Leung
  */
-@FunctionalInterface public interface Identifiable {
+@FunctionalInterface public interface Idable {
 
   /**
    */

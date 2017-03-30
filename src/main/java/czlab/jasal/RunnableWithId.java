@@ -14,7 +14,7 @@ package czlab.jasal;
 /**
  * @author Kenneth Leung
  */
-public interface RunnableWithId extends Runnable, Identifiable {
+public interface RunnableWithId extends Runnable, Idable {
 }
 
 
