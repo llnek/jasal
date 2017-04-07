@@ -17,7 +17,7 @@ package czlab.jasal;
 
   /**
    */
-  public Object catche(Throwable e);
+  public Object catche(Object e);
 
 }
 
