@@ -22,6 +22,10 @@ public interface Triggerable extends Cancelable {
   /**/
   public void fire(Object arg);
 
+  /**
+   */
+  public void fire();
+
 }
 
 
