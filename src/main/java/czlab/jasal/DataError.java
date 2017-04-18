@@ -13,12 +13,29 @@ package czlab.jasal;
 /**
  * @author Kenneth Leung
  */
-public interface Atomic {
+public class DataError extends RuntimeException {
+
+  private static final long serialVersionUID = 1L;
 
   /**
    */
-  public Object atom();
+  public DataError(String m, Throwable t) {
+    super(m, t);
+  }
+
+  /**
+   */
+  public DataError(Throwable t) {
+    super(t);
+  }
+
+  /**
+   */
+  public DataError(String msg) {
+    super(msg);
+  }
 
 }
+
 
 
