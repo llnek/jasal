@@ -37,10 +37,6 @@ public interface Muble extends Gettable, Settable {
 
   /**
    */
-  public Object intern();
-
-  /**
-   */
   public void copy(Muble from);
 
   /**
