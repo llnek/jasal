@@ -38,6 +38,10 @@ public enum CU {
   private static final AtomicLong _sn= new AtomicLong(0L);
   public static final Logger TLOG=getLogger(CU.class);
 
+  public static boolean canLog() {
+    return "true".equals(System.getProperty("czlabloggerflag"));
+  }
+
   public static void main(String[] args) {
     try {
       String HTTP_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss zzz";
@@ -69,7 +73,7 @@ public enum CU {
       }
     }
     catch (Throwable e) {
-      TLOG.error("", e);
+      if (CU.canLog()) TLOG.error("", e);
     }
   }
 
@@ -83,7 +87,7 @@ public enum CU {
       }
     }
     catch (Throwable e) {
-      TLOG.error("", e);
+      if (CU.canLog()) TLOG.error("", e);
     }
   }
 
@@ -132,7 +136,7 @@ public enum CU {
     try {
       Thread.currentThread().join();
     } catch (Throwable e) {
-      TLOG.error("", e);
+      if (CU.canLog()) TLOG.error("", e);
     }
   }
 

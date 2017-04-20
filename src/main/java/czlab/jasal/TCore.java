@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.slf4j.LoggerFactory.getLogger;
 import org.slf4j.Logger;
-
+import czlab.jasal.CU;
 
 /**
  * A (thread executor)
@@ -60,7 +60,8 @@ public class TCore extends ThreadPoolExecutor implements RejectedExecutionHandle
     _id=id;
     _paused=true;
     if (trace) {
-      TLOG.debug("TCore#{} created with threads = {}",
+      if (CU.canLog())
+        TLOG.debug("TCore#{} created with threads = {}",
           id , "" + getCorePoolSize());
     }
   }
@@ -104,7 +105,7 @@ public class TCore extends ThreadPoolExecutor implements RejectedExecutionHandle
     stop();
     shutdown();
     if (_trace) {
-      TLOG.debug("TCore#{} disposed and shut down", _id);
+      if (CU.canLog()) TLOG.debug("TCore#{} disposed and shut down", _id);
     }
   }
 
@@ -113,14 +114,14 @@ public class TCore extends ThreadPoolExecutor implements RejectedExecutionHandle
     if (! _paused) {
       super.execute(r);
     } else {
-      TLOG.warn("Ignoring the runnable, core is not running");
+      if (CU.canLog()) TLOG.warn("Ignoring the runnable, core is not running");
     }
   }
 
   @Override
   public void rejectedExecution(Runnable r, ThreadPoolExecutor x) {
     //TODO: deal with too much work for the core...
-    TLOG.error("TCore#{} rejecting work!", _id);
+    if (CU.canLog()) TLOG.error("TCore#{} rejecting work!", _id);
   }
 
   @Override

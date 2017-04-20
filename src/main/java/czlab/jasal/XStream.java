@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.File;
 import org.slf4j.Logger;
+import czlab.jasal.CU;
 
 /**
  * Wrapper on top of a File input stream such that it can
@@ -129,7 +130,7 @@ public class XStream extends InputStream implements Disposable {
     try {
       return (_fn != null) ? _fn.getCanonicalPath() : "" ;
     } catch (IOException e) {
-      TLOG.error("",e);
+      if (CU.canLog()) TLOG.error("",e);
       return "";
     }
   }
@@ -158,7 +159,7 @@ public class XStream extends InputStream implements Disposable {
     close();
     try { _inp= new FileInputStream(_fn); }
     catch (FileNotFoundException e) {
-      TLOG.error("",e);
+      if (CU.canLog()) TLOG.error("",e);
     }
     _closed=false;
     pos=0L;

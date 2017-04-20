@@ -16,15 +16,16 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.CharArrayWriter;
 import java.io.File;
+import java.nio.charset.Charset;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
-import java.nio.charset.Charset;
 import java.util.Arrays;
 import org.slf4j.Logger;
+import czlab.jasal.CU;
 
 /**
  * Wrapper structure to abstract a piece of data which can be a file
@@ -214,7 +215,7 @@ public class XData implements Serializable, Disposable {
       try {
         len = ((String) _data).getBytes(_encoding).length;
       } catch (Exception e) {
-        TLOG.error("", e);
+        if (CU.canLog()) TLOG.error("", e);
       }
     }
     else

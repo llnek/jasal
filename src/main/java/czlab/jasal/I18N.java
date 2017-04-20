@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import java.util.ResourceBundle;
 import java.util.HashMap;
 import java.util.Map;
+import czlab.jasal.CU;
 
 /**
  * @author Kenneth Leung
@@ -30,7 +31,7 @@ public enum I18N {
   /**
    */
   public static void setBundle(Object bkey, ResourceBundle b) {
-    TLOG.debug("setting a resource bundle, bkey = {}", bkey);
+    if (CU.canLog()) TLOG.debug("setting a resource bundle, bkey = {}", bkey);
     if (bkey != null && b != null) {
       _bs.put(bkey,b);
     }
