@@ -13,11 +13,7 @@ package czlab.jasal;
 /**
  * @author Kenneth Leung
  */
-public interface Hierarchial {
-
-  /**
-   */
-  default public void setParent(Object p) {}
+public interface Hierarchical {
 
   /**
    */
