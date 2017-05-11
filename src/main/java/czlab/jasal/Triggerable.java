@@ -16,15 +16,17 @@ package czlab.jasal;
  */
 public interface Triggerable extends Cancelable {
 
-  /**/
-  public void setTrigger(Object t);
-
-  /**/
+  /**
+   */
   public void fire(Object arg);
 
   /**
    */
   public void fire();
+
+  /**
+   */
+  public void setTrigger(Object t);
 
 }
 

@@ -29,10 +29,10 @@ import czlab.jasal.CU;
 
 /**
  * Wrapper structure to abstract a piece of data which can be a file
- * or a memory byte[], String or some object.
+ * or a memory byte[], String or some object. By default the data
+ * is transient and will be purged unless delete is set to false.
  *
  * @author Kenneth Leung
- *
  */
 public class XData implements Serializable, Disposable {
 
@@ -87,7 +87,7 @@ public class XData implements Serializable, Disposable {
 
   @Override
   public void dispose() {
-    if (_data instanceof File && _cls) {
+    if (_cls && _data instanceof File) {
       try { ((File) _data).delete(); }
       catch (Throwable t) {}
       _data=null;
@@ -124,6 +124,7 @@ public class XData implements Serializable, Disposable {
       this._encoding = src._encoding;
       this._data = src._data;
       this._cls= src._cls;
+      del= src._cls;
       src._data=null;
     }
     else {

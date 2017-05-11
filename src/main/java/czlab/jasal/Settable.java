@@ -17,11 +17,11 @@ public interface Settable {
 
   /**
    */
-  public Object setv(Object key, Object arg);
+  public Object unsetv(Object key);
 
   /**
    */
-  public Object unsetv(Object key);
+  public Object setv(Object key, Object arg);
 
 }
 

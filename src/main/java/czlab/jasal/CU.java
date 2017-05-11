@@ -38,10 +38,14 @@ public enum CU {
   private static final AtomicLong _sn= new AtomicLong(0L);
   public static final Logger TLOG=getLogger(CU.class);
 
+  /**
+   */
   public static boolean canLog() {
     return "true".equals(System.getProperty("czlabloggerflag"));
   }
 
+  /**
+   */
   public static void main(String[] args) {
     try {
       String HTTP_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss zzz";
@@ -52,8 +56,6 @@ public enum CU {
       c= new GregorianCalendar(TimeZone.getTimeZone("GMT"));
       Date d2= c.getTime();
       System.out.println("s2 = " + c.getTime());
-
-
     } catch (Throwable t) {
       t.printStackTrace();
     }
@@ -112,7 +114,6 @@ public enum CU {
     return s==null || s.length() == 0;
   }
 
-
   /**
    * shuffle characters in this string.
    */
@@ -166,7 +167,7 @@ public enum CU {
                     NoSuchMethodException,
                     SecurityException,
                     ClassNotFoundException  {
-    return loadClass(cz).getDeclaredConstructor().newInstance();
+    return loadClass(cz).getConstructor().newInstance();
   }
 
   /**
@@ -174,8 +175,8 @@ public enum CU {
    */
   public static Object syncExec(
       Object syncObj,
-      CallableWithArgs  r, Object a1, Object... args) throws Exception {
-
+      CallableWithArgs r,
+      Object a1, Object... args) throws Exception {
     synchronized(syncObj) {
       return r.run(a1, args);
     }

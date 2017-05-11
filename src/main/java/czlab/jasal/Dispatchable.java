@@ -17,10 +17,11 @@ public interface Dispatchable {
 
   /**
    */
-  public void removeHandler(Object handler);
+  public void addHandler(Object handler);
 
   /**
    */
-  public void addHandler(Object handler);
+  public void removeHandler(Object handler);
 
 }
+

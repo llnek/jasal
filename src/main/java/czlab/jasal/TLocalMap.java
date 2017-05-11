@@ -20,17 +20,20 @@ public enum TLocalMap {
 ;
 
   /**
-  */
-  private static ThreadLocal<Map<Object,Object>> _cache =new ThreadLocal<Map<Object,Object>>() {
+   */
+  public static ThreadLocal<Map<Object,Object>> cache() {
+    return _cache;
+  }
+
+  /**
+   */
+  private static ThreadLocal<Map<Object,Object>>
+    _cache =new ThreadLocal<Map<Object,Object>>() {
+
     protected Map<Object,Object> initialValue() {
       return new HashMap<Object,Object>();
     }
   };
-
-  /**/
-  public static ThreadLocal<Map<Object,Object>> cache() {
-    return _cache;
-  }
 
 }
 

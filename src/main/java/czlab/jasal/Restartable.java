@@ -17,11 +17,11 @@ public interface Restartable {
 
   /**
    */
-  public Object restart(Object arg);
+  public Object restart();
 
   /**
    */
-  public Object restart();
+  public Object restart(Object arg);
 
 }
 

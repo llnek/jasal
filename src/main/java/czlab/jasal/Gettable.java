@@ -15,13 +15,13 @@ package czlab.jasal;
  */
 public interface Gettable {
 
-  /**/
-  public boolean contains(Object key);
-
   /**
    */
   public Object getv(Object key);
 
+  /**
+   */
+  public boolean contains(Object key);
 
 }
 

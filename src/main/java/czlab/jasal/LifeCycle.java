@@ -10,11 +10,11 @@
 
 package czlab.jasal;
 
-
 /**
  * @author Kenneth Leung
  */
-public interface LifeCycle extends Initable ,Startable ,Disposable {
+public interface LifeCycle extends
+  Initable ,Startable ,Disposable {
 
 }
 

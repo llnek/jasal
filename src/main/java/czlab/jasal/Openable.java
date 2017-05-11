@@ -17,11 +17,11 @@ public interface Openable extends java.io.Closeable {
 
   /**
    */
-  public Object open(Object arg);
+  public Object open();
 
   /**
    */
-  public Object open();
+  public Object open(Object arg);
 
 }
 

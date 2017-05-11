@@ -17,15 +17,15 @@ public interface Startable {
 
   /**
    */
-  public Object start(Object arg);
-
-  /**
-   */
   public Object start();
 
   /**
    */
   public void stop();
+
+  /**
+   */
+  public Object start(Object arg);
 
 }
 

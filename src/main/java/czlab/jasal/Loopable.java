@@ -18,11 +18,11 @@ public interface Loopable {
 
   /**
    */
-  public void schedule(Object arg);
+  public void wakeup(Object arg);
 
   /**
    */
-  public void wakeup(Object arg);
+  public void schedule(Object arg);
 
 }
 

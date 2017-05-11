@@ -11,12 +11,11 @@
 package czlab.jasal;
 
 import static org.slf4j.LoggerFactory.*;
-import org.slf4j.Logger;
-
 import java.util.ResourceBundle;
 import java.util.HashMap;
 import java.util.Map;
 import czlab.jasal.CU;
+import org.slf4j.Logger;
 
 /**
  * @author Kenneth Leung

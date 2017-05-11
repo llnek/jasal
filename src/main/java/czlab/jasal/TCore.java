@@ -26,7 +26,8 @@ import czlab.jasal.CU;
  *
  * @author Kenneth Leung
  */
-public class TCore extends ThreadPoolExecutor implements RejectedExecutionHandler, Startable, Disposable {
+public class TCore extends ThreadPoolExecutor
+  implements RejectedExecutionHandler, Startable, Disposable {
 
   public static final Logger TLOG = getLogger(TCore.class);
   private AtomicInteger _seq= new AtomicInteger(0);
@@ -39,8 +40,8 @@ public class TCore extends ThreadPoolExecutor implements RejectedExecutionHandle
   public TCore(final String id,
                int tds,
                long keepAliveMillis, boolean trace) {
-    super(Math.max(2,tds),
-          Math.max(2,tds),
+    super(Math.max(1,tds),
+          Math.max(1,tds),
           keepAliveMillis,
           TimeUnit.MILLISECONDS,
           new LinkedBlockingQueue<Runnable>());
@@ -59,10 +60,10 @@ public class TCore extends ThreadPoolExecutor implements RejectedExecutionHandle
     _trace=trace;
     _id=id;
     _paused=true;
-    if (trace) {
-      if (CU.canLog())
-        TLOG.debug("TCore#{} created with threads = {}",
-          id , "" + getCorePoolSize());
+    if (trace && CU.canLog()) {
+      TLOG.debug("TCore#{} created with threads = {}",
+                 id ,
+                 "" + getCorePoolSize());
     }
   }
 
@@ -104,8 +105,8 @@ public class TCore extends ThreadPoolExecutor implements RejectedExecutionHandle
   public void dispose() {
     stop();
     shutdown();
-    if (_trace) {
-      if (CU.canLog()) TLOG.debug("TCore#{} disposed and shut down", _id);
+    if (_trace && CU.canLog()) {
+      TLOG.debug("TCore#{} disposed and shut down", _id);
     }
   }
 
@@ -114,14 +115,16 @@ public class TCore extends ThreadPoolExecutor implements RejectedExecutionHandle
     if (! _paused) {
       super.execute(r);
     } else {
-      if (CU.canLog()) TLOG.warn("Ignoring the runnable, core is not running");
+      if (CU.canLog())
+        TLOG.warn("Ignoring the runnable, core is not running");
     }
   }
 
   @Override
   public void rejectedExecution(Runnable r, ThreadPoolExecutor x) {
     //TODO: deal with too much work for the core...
-    if (CU.canLog()) TLOG.error("TCore#{} rejecting work!", _id);
+    if (CU.canLog())
+      TLOG.error("TCore#{} rejecting work!", _id);
   }
 
   @Override

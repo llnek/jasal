@@ -19,11 +19,11 @@ public interface Debuggable {
 
   /**
    */
-  public void dbgShow(PrintStream out);
+  public String dbgStr();
 
   /**
    */
-  public String dbgStr();
+  public void dbgShow(PrintStream out);
 
 }
 

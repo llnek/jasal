@@ -25,7 +25,8 @@ public interface Schedulable extends Disposable, Activable {
    */
   public Object postpone(Runnable w, long delayMillis);
 
-  /**/
+  /**
+   */
   public void purge();
 
   /**

@@ -14,7 +14,7 @@ package czlab.jasal;
 /**
  * @author Kenneth Leung
  */
-@FunctionalInterface public interface Config {
+public interface Config {
 
   /**
    */

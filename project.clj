@@ -8,9 +8,9 @@
   :description "General helper java classes + interfaces."
   :url "https://github.com/llnek/jasal"
 
-  :dependencies [[org.apache.logging.log4j/log4j-slf4j-impl "2.8"]
-                 [org.apache.logging.log4j/log4j-core "2.8"]
-                 [org.slf4j/slf4j-api "1.7.24" ]]
+  :dependencies [[org.apache.logging.log4j/log4j-slf4j-impl "2.8.2"]
+                 [org.apache.logging.log4j/log4j-core "2.8.2"]
+                 [org.slf4j/slf4j-api "1.7.25" ]]
 
   :plugins [[lein-codox "0.10.3"]
             [lein-junit "1.1.8"]
@@ -38,6 +38,7 @@
   :javadoc-opts {:package-names ["czlab.jasal"]
                  :output-dir "docs"}
 
+  ;;lein junit
   :junit-test-file-pattern #".*JUnit*.java"
   :junit-results-dir "test-results"
   :junit-formatter "xml"
