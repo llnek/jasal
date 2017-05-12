@@ -18,7 +18,7 @@ public interface MonoFlop {
 
   /**
    */
-  public boolean firstCall();
+  public boolean isFirstCall();
 
 }
 
