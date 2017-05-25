@@ -16,12 +16,12 @@ package czlab.jasal;
 public interface Schedulable extends Disposable, Activable {
 
   /**
-   * delay x millis set alarm
+   * Delay x millis set alarm
    */
   public Object alarm(Interruptable w, Object arg, long delayMillis);
 
   /**
-   * delay x millis before running
+   * Delay x millis before running
    */
   public Object postpone(Runnable w, long delayMillis);
 
@@ -46,7 +46,7 @@ public interface Schedulable extends Disposable, Activable {
   public void hold(Runnable w);
 
   /**
-   * take the function out of *hold* state and run it
+   * Take the function out of *hold* state and run it
    */
   public void wakeAndRun(Object pid, Runnable w);
 
@@ -55,7 +55,7 @@ public interface Schedulable extends Disposable, Activable {
   public void wakeup(Runnable w);
 
   /**
-   * run this function
+   * Run this function
    */
   public void reschedule(Runnable w);
 

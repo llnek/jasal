@@ -47,7 +47,7 @@ public enum CU {
   /**
    */
   public static void main(String[] args) {
-    try {
+    try {/*
       String HTTP_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss zzz";
       SimpleDateFormat fmt = new SimpleDateFormat(HTTP_DATE_FORMAT, Locale.US);
       fmt.setTimeZone(TimeZone.getTimeZone("GMT"));
@@ -56,13 +56,14 @@ public enum CU {
       c= new GregorianCalendar(TimeZone.getTimeZone("GMT"));
       Date d2= c.getTime();
       System.out.println("s2 = " + c.getTime());
+      */
     } catch (Throwable t) {
       t.printStackTrace();
     }
   }
 
   /**
-   * block and wait on this lock.
+   * Block and wait on this lock.
    */
   public static void block(Object lock, long waitMillis) {
     try {
@@ -80,7 +81,7 @@ public enum CU {
   }
 
   /**
-   * notify all threads waiting on this lock.
+   * Notify all threads waiting on this lock.
    */
   public static void unblock(Object lock) {
     try {
@@ -94,28 +95,28 @@ public enum CU {
   }
 
   /**
-   * cast this to Object.
+   * Cast this to Object.
    */
   public static Object asJObj(Object a) {
     return a;
   }
 
   /**
-   * null string to blank.  safely strit this object.
+   * Null string to blank.  safely string this object.
    */
   public static String nsb(Object x) {
     return x==null ? "" : x.toString();
   }
 
   /**
-   *
+   * Test for empty or null string.
    */
   public static boolean isEmpty(String s) {
     return s==null || s.length() == 0;
   }
 
   /**
-   * shuffle characters in this string.
+   * Shuffle characters in this string.
    */
   public static String shuffle(String s) {
     List<Character> lst = new ArrayList<>();
@@ -131,7 +132,7 @@ public enum CU {
   }
 
   /**
-   * block forever until this thread dies.
+   * Block forever until this thread dies.
    */
   public static void block() {
     try {
@@ -142,14 +143,14 @@ public enum CU {
   }
 
   /**
-   * split a string delimited by a NUL char.
+   * Split a string delimited by a NUL char.
    */
   public static String[] splitNull(String s) {
     return nsb(s).split("\u0000");
   }
 
   /**
-   * load this java class.
+   * Load a java class.
    */
   public static Class<?> loadClass(String cz)
     throws ClassNotFoundException {
@@ -157,7 +158,7 @@ public enum CU {
   }
 
   /**
-   * call the default constructor on this java class.
+   * Call the default constructor on this java class.
    */
   public static Object dftCtor(String cz)
     throws InstantiationException,
@@ -171,7 +172,7 @@ public enum CU {
   }
 
   /**
-   * block and call this function.
+   * Block and call this function.
    */
   public static Object syncExec(
       Object syncObj,
@@ -183,12 +184,12 @@ public enum CU {
   }
 
   /**
-   * return next sequence number.
+   * Get next sequence number.
    */
   public static long nextSeqLong() { return _sn.incrementAndGet(); }
 
   /**
-   * return next sequence number.
+   * Get next sequence number.
    */
   public static int nextSeqInt() { return _si.incrementAndGet(); }
 

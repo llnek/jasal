@@ -61,9 +61,7 @@ public class TCore extends ThreadPoolExecutor
     _id=id;
     _paused=true;
     if (trace && CU.canLog()) {
-      TLOG.debug("TCore#{} created with threads = {}",
-                 id ,
-                 "" + getCorePoolSize());
+      TLOG.debug("TCore#{} ctor: threads = {}", id , "" + getCorePoolSize());
     }
   }
 
