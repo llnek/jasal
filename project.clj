@@ -40,7 +40,7 @@
 
   ;;lein junit
   :junit-test-file-pattern #".*JUnit*.java"
-  :junit-results-dir "test-results"
+  :junit-results-dir "test-reports"
   :junit-formatter "xml"
   :junit ["src/test/java"]
 

@@ -10,7 +10,7 @@ projects, such as `project wabbit`.
 Add the following dependency to your `project.clj` file:
 
     [io.czlab/jasal "1.0.0"]
-    
+
 ## Documentation
 
 * [API Docs](https://llnek.github.io/jasal/)
@@ -23,7 +23,7 @@ Simply import the wanted classes into your clojure code, for example:
 (ns demo.core
   (:import [czlab.jasal CU]))
 
-(defn shuffleInput 
+(defn shuffleInput
   ^String
   [^String someString]
   (CU/shuffle someString))
