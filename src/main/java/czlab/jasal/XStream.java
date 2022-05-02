@@ -1,34 +1,37 @@
-/**
- * Copyright (c) 2013-2017, Kenneth Leung. All rights reserved.
- * The use and distribution terms for this software are covered by the
- * Eclipse Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php)
- * which can be found in the file epl-v10.html at the root of this distribution.
- * By using this software in any fashion, you are agreeing to be bound by
- * the terms of this license.
- * You must not remove this notice, or any other, from this software.
- */
+/* Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Copyright © 2013-2022, Kenneth Leung. All rights reserved. */
 
 package czlab.jasal;
 
-import static org.slf4j.LoggerFactory.*;
+//import static org.slf4j.LoggerFactory.*;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
+import java.lang.ref.Cleaner;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.File;
-import org.slf4j.Logger;
-import czlab.jasal.CU;
+//import org.slf4j.Logger;
 
 /**
  * Wrapper on top of a File input stream such that it can
  * delete itself from the file system when garbage collected.
  *
- * @author Kenneth Leung
- *
  */
-public class XStream extends InputStream implements Disposable {
+@SuppressWarnings("deprecation")
+public class XStream extends InputStream {
 
-  public static final Logger TLOG= getLogger(XStream.class);
+  //public static final Logger TLOG= getLogger(XStream.class);
   private transient InputStream _inp = null;
   private boolean _closed = true;
   private boolean _transientFile;
@@ -40,6 +43,9 @@ public class XStream extends InputStream implements Disposable {
   public XStream(File f, boolean isTransient) {
     _transientFile = isTransient;
     _fn= f;
+    Cleaner.create().register(this, ()->{
+      this.finalise();
+    });
   }
 
   /**
@@ -67,7 +73,7 @@ public class XStream extends InputStream implements Disposable {
     if (b == null) { return -1; } else {
       pre();
       int r = _inp.read(b, offset, len);
-      pos = (r== -1 ) ? -1 : pos + r;
+      pos = (r == -1) ? -1 : pos + r;
       return r;
     }
   }
@@ -82,7 +88,7 @@ public class XStream extends InputStream implements Disposable {
     if (n < 0L) { return -1L; } else {
       pre();
       long  r= _inp.skip(n);
-      if (r > 0L) { pos +=  r; }
+      if (r > 0L) { pos += r; }
       return r;
     }
   }
@@ -115,7 +121,8 @@ public class XStream extends InputStream implements Disposable {
     return this;
   }
 
-  @Override
+  /*
+   */
   public void dispose() {
     close();
     if (_transientFile && _fn != null) {
@@ -130,7 +137,7 @@ public class XStream extends InputStream implements Disposable {
     try {
       return (_fn != null) ? _fn.getCanonicalPath() : "" ;
     } catch (IOException e) {
-      if (CU.canLog()) TLOG.error("",e);
+      //if (CU.canLog()) TLOG.error("",e);
       return "";
     }
   }
@@ -142,8 +149,7 @@ public class XStream extends InputStream implements Disposable {
    */
   public long getPosition() { return pos; }
 
-  @Override
-  public void finalize() throws Throwable {
+  private void finalise(){
     dispose();
   }
 
@@ -159,7 +165,7 @@ public class XStream extends InputStream implements Disposable {
     close();
     try { _inp= new FileInputStream(_fn); }
     catch (FileNotFoundException e) {
-      if (CU.canLog()) TLOG.error("",e);
+      //if (CU.canLog()) TLOG.error("",e);
     }
     _closed=false;
     pos=0L;

@@ -1,22 +1,27 @@
-/**
- * Copyright (c) 2013-2017, Kenneth Leung. All rights reserved.
- * The use and distribution terms for this software are covered by the
- * Eclipse Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php)
- * which can be found in the file epl-v10.html at the root of this distribution.
- * By using this software in any fashion, you are agreeing to be bound by
- * the terms of this license.
- * You must not remove this notice, or any other, from this software.
- */
+/* Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Copyright © 2013-2022, Kenneth Leung. All rights reserved. */
 
 package czlab.jasal;
 
-import static org.slf4j.LoggerFactory.getLogger;
+//import static org.slf4j.LoggerFactory.getLogger;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.CharArrayWriter;
 import java.io.File;
 import java.nio.charset.Charset;
+import java.lang.ref.Cleaner;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,38 +29,34 @@ import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.util.Arrays;
-import org.slf4j.Logger;
-import czlab.jasal.CU;
+//import org.slf4j.Logger;
 
 /**
  * Wrapper structure to abstract a piece of data which can be a file
  * or a memory byte[], String or some object. By default the data
  * is transient and will be purged unless delete is set to false.
  *
- * @author Kenneth Leung
  */
-public class XData implements Serializable, Disposable {
+@SuppressWarnings("deprecation")
+public class XData implements Serializable {
 
   private static final long serialVersionUID = -8637175588593032279L;
-  public static final Logger TLOG= getLogger(XData.class);
+  //public static final Logger TLOG= getLogger(XData.class);
   private String _encoding ="utf-8";
-  private Object _data = null;
   private boolean _cls=true;
+  private Object _data = null;
 
   /**
    */
   public XData(Object p, boolean delFlag) {
     reset(p,delFlag);
+    Cleaner.create().register(this, ()->{
+      this.finalise();
+    });
   }
-
-  /**
-   */
   public XData(Object p) {
-    reset(p);
+    this(p,true);
   }
-
-  /**
-   */
   public XData() {
     this(null);
   }
@@ -85,7 +86,8 @@ public class XData implements Serializable, Disposable {
     return this;
   }
 
-  @Override
+  /*
+   */
   public void dispose() {
     if (_cls && _data instanceof File) {
       try { ((File) _data).delete(); }
@@ -110,8 +112,7 @@ public class XData implements Serializable, Disposable {
     }
     else
     if (obj instanceof CharArrayWriter) {
-      _data = new String(
-              ((CharArrayWriter) obj).toCharArray());
+      _data = ((CharArrayWriter) obj).toCharArray();
     }
     else
     if (obj instanceof File[]) {
@@ -151,15 +152,19 @@ public class XData implements Serializable, Disposable {
   /**
    */
   public byte[] getBytes() throws IOException {
-    int limit= 1024 * 1024 * 10;//10meg!
+    return getBytes(1024 * 1024 * 10); //10meg!
+  }
+
+  /**
+   */
+  public byte[] getBytes(int maxSize) throws IOException {
     byte[] bits=null;
 
     if (_data instanceof File) {
       File f= (File) _data;
       long n= f.length();
       try (InputStream inp = new FileInputStream(f)) {
-        //if (n > Integer.MAX_VALUE) {
-        if (n > limit) {
+        if (n > maxSize) {
           throw new IOException("file too large, " +
                                 "size= " +
                                 Long.toString(n));
@@ -200,7 +205,6 @@ public class XData implements Serializable, Disposable {
   }
 
   /**
-   * @throws IOException
    */
   public long size() throws IOException {
     long len=0L;
@@ -216,7 +220,7 @@ public class XData implements Serializable, Disposable {
       try {
         len = ((String) _data).getBytes(_encoding).length;
       } catch (Exception e) {
-        if (CU.canLog()) TLOG.error("", e);
+        //if (CU.canLog()) TLOG.error("", e);
       }
     }
     else
@@ -232,8 +236,7 @@ public class XData implements Serializable, Disposable {
     return len;
   }
 
-  @Override
-  public void finalize() throws Throwable {
+  private void finalise(){
     dispose();
   }
 
