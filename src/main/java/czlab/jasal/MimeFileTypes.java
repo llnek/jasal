@@ -15,7 +15,7 @@
 package czlab.jasal;
 
 
-import javax.activation.MimetypesFileTypeMap;
+import jakarta.activation.MimetypesFileTypeMap;
 import java.io.UnsupportedEncodingException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

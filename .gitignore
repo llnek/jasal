@@ -8,6 +8,7 @@
 /classes
 /checkouts
 /public
+/test-reports
 
 pom.xml.asc
 pom.xml

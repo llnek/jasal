@@ -14,7 +14,7 @@
 
 package czlab.jasal;
 
-import javax.activation.DataSource;
+import jakarta.activation.DataSource;
 import static czlab.jasal.CU.nsb;
 import czlab.jasal.XData;
 import java.io.File;
